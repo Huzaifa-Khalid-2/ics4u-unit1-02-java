@@ -1,28 +1,25 @@
 /*
-* This program calculates the energy
-* a mass would produce at the speed of light.
+* The program gets mass, plugs into alberts formula E = mc^2
+* and gives you the energy with a try and catch
 *
-* @author  Huzaifa Khalid
+* @author  Jackson Naufal
 * @version 1.0
-* @since   2020-09-18
+* @since   2020-01-01
+*
+* This is a E = mc^2 calculator program.
 */
 
 import java.util.Scanner;
-
 /**
-* This is an energy calculation program.
-*/
-final class EnergyCalculation {
+ * This is E = mc^2 program.
+ */
+
+final class AlbertCalculator {
 
     /**
-    * Constant assigned to 299800000.
+    * This is the speed of light for E = m(c)^2.
     */
-    public static final float SPEED_OF_LIGHT = 299800000;
-
-    /**
-    * Constant assigned to 2.
-    */
-    public static final float TWO = 2;
+    public static final double ALBERT = 298000000;
 
     /**
     * Prevent instantiation.
@@ -32,7 +29,8 @@ final class EnergyCalculation {
     * @throws IllegalStateException
     *
     */
-    private EnergyCalculation() {
+
+    private AlbertCalculator() {
         throw new IllegalStateException("Cannot be instantiated");
     }
 
@@ -42,28 +40,18 @@ final class EnergyCalculation {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
-        // input
-        final Scanner massObj = new Scanner(System.in);
-        System.out.println("Enter the mass of your object (kg): ");
+        // print out "Albert Einstien Formula"
 
-        /*
-        * This try-catch ensures the program
-        * won't crash with bad input.
-        */
         try {
-            // process
-            final double mass = massObj.nextFloat();
-            if (mass >= 0) {
-                final double energy = mass * Math.pow(SPEED_OF_LIGHT, TWO);
-                // output
-                System.out.printf(energy + " Joules of energy.");
-            } else {
-                System.out.println("Number cannot be negative.");
-            }
+            final Scanner myObj = new Scanner(System.in);
+            System.out.print("Enter mass in (Kg): ");
+            final float mass = myObj.nextFloat();
+            System.out.println("Energy Outputted is (J): "
+                + (mass * Math.pow(ALBERT, 2)));
         } catch (java.util.InputMismatchException ex) {
-            System.out.println("Invalid Input.");
+            System.out.println("Invalid Input!");
         } finally {
-            System.out.println("\nDone.");
+            System.out.println("\nDone!");
         }
     }
 }
