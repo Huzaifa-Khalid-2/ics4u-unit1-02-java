@@ -1,27 +1,29 @@
 /*
- * The program shows how to get input
- *   and deal with numbers.
- *
- * @author  Huzaifa Khalid
- * @version 1.0
- * @since   2022-09-14
- */
+* This program calculates the energy
+* a mass would produce at the speed of light.
+*
+* @author  Huzaifa Khalid
+* @version 1.0
+* @since   2020-09-18
+*/
 
-import java.io.Console;
+import java.util.Scanner;
 
 /**
-* This is the log calculator program.
+* This is an energy calculation program.
 */
-final class LogCalculator {
-    /**
-     * Maximum capacity of the truck
-     */
-    public static final float truckCapacity = 1100;
+final class EnergyCalculation {
 
     /**
-     * Average weight of maple logs
-     */
-    public static final float mapleWeight = 20;
+    * Constant assigned to 299800000.
+    */
+    public static final float SPEED_OF_LIGHT = 299800000;
+
+    /**
+    * Constant assigned to 2.
+    */
+    public static final float TWO = 2;
+
     /**
     * Prevent instantiation.
     * Throw an exception IllegalStateException.
@@ -30,7 +32,7 @@ final class LogCalculator {
     * @throws IllegalStateException
     *
     */
-    private LogCalculator() {
+    private EnergyCalculation() {
         throw new IllegalStateException("Cannot be instantiated");
     }
 
@@ -40,17 +42,29 @@ final class LogCalculator {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
+        // input
+        final Scanner massObj = new Scanner(System.in);
+        System.out.println("Enter the mass of your object (kg): ");
 
-        final Console console = System.console();
-        final String logLengthString = console.readLine(
-                "How long are the logs(m) : ");
-
-        final float logLength = Float.valueOf(logLengthString);
-
-        final float logAmount = truckCapacity / (mapleWeight * logLength);
-
-        // print out answer
-        System.out.println(logAmount + " Logs ca fit in the truck ");
-        System.out.println("\nDone.");
+        /*
+        * This try-catch ensures the program
+        * won't crash with bad input.
+        */
+        try {
+            // process
+            final double mass = massObj.nextFloat();
+            if (mass >= 0) {
+                final double energy = mass * Math.pow(SPEED_OF_LIGHT, TWO);
+                // output
+                System.out.printf(energy + " Joules of energy.");
+            } else {
+                System.out.println("Number cannot be negative.");
+            }
+        } catch (java.util.InputMismatchException ex) {
+            System.out.println("Invalid Input.");
+        } finally {
+            System.out.println("\nDone.");
+        }
     }
 }
+
